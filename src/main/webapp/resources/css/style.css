@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+/*
+.panel-default > .panel-heading {
+  background-color: #333333 !important;
+  color: #aaaaaa !important;
+}
+*/
+
+.heading-text {
+	font-size: 130%;
+}
+
+.overflow-table {
+	height: 300px !important;
+	overflow:scroll;
+}
+
+.overflow-table-fav {
+	height: 150px !important;
+	overflow: auto;
+}
+
+/* unvisited link */
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: black;
+}
+
+/* selected link */
+a:active {
+    color: black;
+}
