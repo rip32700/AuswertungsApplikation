@@ -8,8 +8,9 @@ public class Query {
 	private String benutzer;
 	private String erstellt;
 	private String bereich;
+	private String sql;
 	
-	public Query(String awid, String text, String art, String benutzer, String erstellt, String bereich) {
+	public Query(String awid, String text, String art, String benutzer, String erstellt, String bereich, String sql) {
 		super();
 		this.awid = awid;
 		this.text = text;
@@ -17,6 +18,7 @@ public class Query {
 		this.benutzer = benutzer;
 		this.erstellt = erstellt;
 		this.bereich = bereich;
+		this.sql = sql;
 	}
 	
 	public String getAwid() {
@@ -55,10 +57,17 @@ public class Query {
 	public void setBereich(String bereich) {
 		this.bereich = bereich;
 	}
+	public String getSql() {
+		return sql;
+	}
+	public void setSql(String sql) {
+		this.sql = sql;
+	}
 
 	@Override
 	public String toString() {
 		return "Query [awid=" + awid + ", text=" + text + ", art=" + art + ", benutzer=" + benutzer + ", erstellt="
-				+ erstellt + ", bereich=" + bereich + "]";
+				+ erstellt + ", bereich=" + bereich + ", sql=" + sql + "]";
 	}
+	
 }

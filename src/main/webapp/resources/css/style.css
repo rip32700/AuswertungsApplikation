@@ -7,19 +7,30 @@
 }
 */
 
+.equalpanels {
+	margin-bottom: -10;
+    padding-bottom: 10;
+    height: 300px;
+}
+
+
 .heading-text {
 	font-size: 130%;
 }
 
+
 .overflow-table {
 	height: 300px !important;
+	width:  700px !important;
 	overflow:scroll;
 }
+
 
 .overflow-table-fav {
 	height: 150px !important;
 	overflow: auto;
 }
+
 
 /* unvisited link */
 a:link {

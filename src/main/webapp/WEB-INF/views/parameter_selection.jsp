@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>  -->
 <%@ page session="false" %>
 
 <div class="starter-template">
@@ -12,7 +13,6 @@
 <p class="text-center">Fortschritt der Bearbeitung</p>
 <div class="progress">
   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-    <!-- <span class="sr-only">40% Complete</span>  -->
     40%
   </div>
 </div>
@@ -33,34 +33,22 @@
 	  </div>
 		
 		<br/>
-		<form method="post">
+		<form method="post" action="<c:url value="/parameter_selected" />">
 		<table class="table">
-		
-			<c:set var="count" value="0" scope="page" />
 			<c:forEach items="${boundVariables}" var="boundVar">
 				
-				
-				<tr>
-				    <c:if test="${count %2 == 1}">
-				    	<div class="form-group form-inline">
-				    </c:if>
-					
-					<td><label for="<c:out value='${boundVar}'/>"><c:out value='${boundVar}'/></label></td>
-					<td><input type="text" class="form-control" id="<c:out value='${boundVar}'/>"/></td>
-					
-					 <c:if test="${count %2 == 1}">
-				    	</div>
-				    </c:if>
-					
-				</tr>
-				<c:set var="count" value="${count + 1}" scope="page"/>
+				<div class="form-group form-inline">
+					<tr>
+						<td><label for="<c:out value='${boundVar}'/>"><c:out value='${boundVar}'/></label></td>
+						<td><input type="text" class="form-control" id="<c:out value='${boundVar}'/>"/></td>
+					</tr>
+				</div>
 			</c:forEach>
 		</table>
-		</form>
 </div>
-
-<form method="post" action="<c:url value="/parameter_selected" />">
-	<button type="submit" class="btn btn-default btn-lg">Weiter</button>
+	<button type="submit" class="btn btn-primary btn-lg">Weiter</button>
 </form>
+
+</div>
 <br/>
 <br/>

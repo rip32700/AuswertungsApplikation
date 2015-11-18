@@ -1,6 +1,8 @@
 package com.phoebus.abfragen.web;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.phoebus.abfragen.model.Query;
 import com.phoebus.abfragen.persistence.QueryRepository;
-import com.phoebus.abfragen.service.BoundVarFilter;
-import com.phoebus.abfragen.service.ExcelReportView;
 
 @Controller
 public class HomeController {
@@ -28,58 +27,37 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String querySelection(final Model model) {
+		
 		List<Query> queries = repository.findAll();
 		model.addAttribute("queryList", queries);
+		
+		model.addAttribute("bereicheList", getSortedAndDistinctLists(queries, "bereich"));
+		model.addAttribute("erstelltList", getSortedAndDistinctLists(queries, "erstellt"));
 		
 		return "query_selection";
 	}
 	
-	@RequestMapping(value = "/query_selected", method = RequestMethod.POST)
-	public String querySelected(final Model model) {
-		
-		//save query
-		
-		// get selected query and find prepared string, filter bound variables
-		// just for testing purpose:
-		List<String> boundVars = BoundVarFilter.getBoundVariables("SELECT a.an_antragsnr, a.an_produktkz, a.an_zahlbeitrag FROM antraege a " + 
-				"WHERE a.an_persnr = :personennummer AND a.an_beginn = :beginn AND a.an_stoergrundkz " + 
-                "= :status AND a.an_teilantragsnr = 0;");
-		model.addAttribute("boundVariables", boundVars);
-		
-		return "parameter_selection";
-	}
 	
-	@RequestMapping(value = "/parameter_selected", method = RequestMethod.POST)
-	public String paramterSelected(final Model model) {
-		
-		//save paramters
-		
-		return "processing";
-	}
+	/* HELPER METHODS */
 	
-	/*
-	@RequestMapping(value = "/query_selected", method = RequestMethod.GET)
-	public String querySelected(final Model model) {
+	private List<String> getSortedAndDistinctLists(List<Query> queries, String attribut) {
 		
-		List<Query> queries = repository.findAll();
-		model.addAttribute("queryList", queries);
+		List<String> resultList = new ArrayList<>();
+		String tmp = "";
 		
-		List<String> boundVars = BoundVarFilter.getBoundVariables("SELECT a.an_antragsnr, a.an_produktkz, a.an_zahlbeitrag FROM antraege a " + 
-										"WHERE a.an_persnr = :personennummer AND a.an_beginn = :beginn AND a.an_stoergrundkz " + 
-				                        "= :status AND a.an_teilantragsnr = 0;");
-		model.addAttribute("boundVariables", boundVars);
+		for(Query query : queries) {
+			if("bereich".equals(attribut)) {
+				tmp = query.getBereich();
+			} else if("erstellt".equals(attribut)) {
+				tmp = query.getErstellt();
+			}
+			if(!resultList.contains(tmp)) {
+				resultList.add(tmp);
+			}
+		}
 		
-		return "home";
+		Collections.sort(resultList);
+		
+		return resultList;
 	}
-	*/
-	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String process(final Model model) {
-		return "processing";
-	}
-	
-	@RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
-		return new ModelAndView(new ExcelReportView(), "queryList", repository.findAll());
-    }    
 }
