@@ -1,226 +1,115 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
+<script type="text/javascript">
+function open_window(url, name) {
+    window.open(url, name, "width=800, height=600");
+}
+</script>
+
+
 <div class="starter-template">
- 	<div class="text-center">
-      <h1>Abfragen Applikation</h1>
-      <p class="lead">
-		Beschreibung der Applikation...  
-	  </p>
+ 	<div class="r">
+      <ul class="heading-text">
+      	<li>Bitte waehlen Sie im Folgendem die gewuenschte Auswertung aus, welche ausgefuehrt werden soll</li>
+      	<li>Mit Hilfe der Filter-Optionen koennen Sie die Liste der Abfragen einschraenken</li>
+      	<li>In der Favoriten-Liste finden Sie Ihre am Haeufigsten benutzten Abfragen</li>
+      </ul>
 	</div>
-</div>
- <br>
- 
-<div class="panel panel-default col-md-11 col-md-offset-1">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">Filter fuer Abfragen</div>
-	  <!--<div class="panel-body">
-		<p>Beschreibung</p>
-	  </div>
-		-->
-		<br/>
-		<form>
-		<table class="table">
-			<tr><div class="form-group form-inline">
-				<td>
-					<label for="exampleInputEmail1">Paramter 1</label>
-				</td>
-				<td>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 2
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 3
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 4
-						</label>
-					 </div>
-				</td>
-			</div><tr>
-			<tr><div class="form-group form-inline">
-				<td>
-					<label for="exampleInputEmail1">Paramter 5</label>
-				</td>
-				<td>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 6
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 7
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 8
-						</label>
-					 </div>
-				</td>
-			</div><tr>
-			<tr><div class="form-group form-inline">
-				<td>
-					<label for="exampleInputEmail1">Paramter 9</label>
-				</td>
-				<td>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 10
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 11
-						</label>
-					 </div>
-				</td>
-				<td>
-					 <div class="checkbox">
-						<label>
-						  <input type="checkbox"> Paramter 2
-						</label>
-					 </div>
-				</td>
-			</div><tr>
-		</table>
-		</form>
-</div>
+ 	<br>
 
-<div class="panel panel-default  col-md-11 col-md-offset-1">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">Favoriten</div>
-	  <!--<div class="panel-body">
-		<p>Beschreibung</p>
-	  </div>
-		-->
-	  <!-- Table -->
-	  <div class="overflow-table-fav">
-	  <table class="table table-hover">
-		<thead><td><b>Beschreibung</b></td><td><b>Art / Typ</b></td><td><b>Bereich</b></td><td><b>Erstellt am</b></td></thead>
-		<tr><td><a href="#">Abfrage 1<a/></td><td>...</td><td>...</td><td>...</td></tr>
-		<tr><td><a href="#">Abfrage 2<a/></td><td>...</td><td>...</td><td>...</td></tr>
-		<tr><td><a href="#">Abfrage 3<a/></td><td>...</td><td>...</td><td>...</td></tr>
-	  </table>
-	  </div>
-</div>
-	
-<div class="panel panel-default  col-md-11 col-md-offset-1">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">Abfragen</div>
-	  <!--<div class="panel-body">
-		<p>Beschreibung</p>
-	  </div>
-		-->
-	  <!-- Table -->
-	  <div class="overflow-table">
-	  <table class="table table-hover">
-		<thead><td><b>AWID</b></td><td><b>Text</b></td><td><b>Art</b></td><td><b>Benutzer</b></td><td><b>Erstellt</b></td><td><b>Bereich</b></td></thead>
-		
-		<c:forEach items="${queryList}" var="query">
-			<tr><td><a href="#"><c:out value="${query.awid}" /></a></td><td><c:out value="${query.text}" /></td><td><c:out value="${query.art}" /></td><td><c:out value="${query.benutzer}" /></td><td><c:out value="${query.erstellt}" /></td><td><c:out value="${query.bereich}" /></td></tr>
-		</c:forEach>
-		
-	  </table>
-	  </div>
-</div>
-	
-<div class="panel panel-default col-md-11 col-md-offset-1">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">Eingabe-Werte</div>
-	  <!--<div class="panel-body">
-		<p>Beschreibung</p>
-	  </div>
-		-->
-		<br/>
-		<form method="post">
-		<table class="table">
-		
-			<c:set var="count" value="0" scope="page" />
-			<c:forEach items="${boundVariables}" var="boundVar">
-				
-				
-				<tr>
-				    <c:if test="${count %2 == 1}">
-				    	<div class="form-group form-inline">
-				    </c:if>
-					
-					<td><label for="<c:out value='${boundVar}'/>"><c:out value='${boundVar}'/></label></td>
-					<td><input type="text" class="form-control" id="<c:out value='${boundVar}'/>"/></td>
-					
-					 <c:if test="${count %2 == 1}">
-				    	</div>
-				    </c:if>
-					
-				</tr>
-				<c:set var="count" value="${count + 1}" scope="page"/>
-			</c:forEach>
-			<tr>
-				<td><button type="submit" class="btn btn-default">Submit</button></td>
-			<tr>
-		</table>
-		</form>
-</div>
-
-
-<div class="panel-group">
-	<div class="panel panel-default col-md-11 col-md-offset-1">
-		<div class="panel-heading">
-			History  <a data-toggle="collapse" data-target="#collapse1" href="#collapse1"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+	<div class="row">
+		<!-- FILTER -->
+		<div class="col-md-4">
+			<div class="panel panel-default equalpanels">
+				<div class="panel-heading"><b>Filter fuer die Auswertungen</b></div>
+				<div class="panel-body">
+					Bitte waehlen Sie die gewuenschten Filter Optionen aus, um die Liste der Auswertungen weiter unten einzuschraenken.
+				</div>
+					<form>
+						<div class="form-group">
+							Bereich:
+							<select class="form-control">
+								<c:forEach items="${bereicheList}" var="bereich">
+									<option>${bereich}</option>
+								</c:forEach>
+							</select>
+							Erstell-Datum:
+							<select class="form-control">
+								<c:forEach items="${erstelltList}" var="datum">
+									<option>${datum}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</form>
+			</div>
 		</div>
-		<div id="collapse1" class="panel-collapse collapse">
-			<div class="panel-body">
-			  <!-- Table -->
-			  <table class="table table-hover">
-				<thead><td><b>AFID</b></td><td><b>Datum</b></td><td><b>Download</b></td></thead>
-				<tr><td><a href="#">12345<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-				<tr><td><a href="#">57634<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-				<tr><td><a href="#">67367<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-			  </table>
-			 </div>
+		<!-- FAV LIST -->
+		<div class="col-md-8">
+			<div class="panel panel-default equalpanels">
+				<div class="panel-heading"><b>Favorisierte Auswertungen</b></div>
+				<div class="panel-body">
+					Dies sind Ihre meist verwendeten Auswertungen.
+				</div>
+				  <!-- Table -->
+				  <div class="overflow-table-fav">
+					  <table class="table table-hover table-striped" data-link="row">
+					  	<thead>
+					  		<tr><th>AWID</th><th>Text</th><th>Art</th><th>Erstellt am</th><th>Bereich</th></tr>
+					  	</thead>
+					  	<tbody data-link="row" class="rowlink">
+					  		<tr>
+						  		<td><a href="<c:url value="/query_selected/${queryList[0].awid}"/>" onclick="open_window(this.href, 'query_selected_<c:out value="${queryList[0].awid}" />'); return false;" ><c:out value="${queryList[0].awid}" /></a></td> 
+								<td><c:out value="${queryList[0].text}" /></td>
+								<td><c:out value="${queryList[0].art}" /></td>
+								<td><c:out value="${queryList[0].erstellt}" /></td>
+								<td><c:out value="${queryList[0].bereich}" /></td>
+							</tr>
+							<tr>
+						  		<td><a href="<c:url value="/query_selected/${queryList[1].awid}"/>" onclick="open_window(this.href, 'query_selected_<c:out value="${queryList[1].awid}" />'); return false;" ><c:out value="${queryList[1].awid}" /></a></td> 
+								<td><c:out value="${queryList[1].text}" /></td>
+								<td><c:out value="${queryList[1].art}" /></td>
+								<td><c:out value="${queryList[1].erstellt}" /></td>
+								<td><c:out value="${queryList[1].bereich}" /></td>
+							</tr>
+					  	</tbody>
+					  </table>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-
-<div class="panel panel-default  col-md-11 col-md-offset-1">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading">History</div>
-	  <!--<div class="panel-body">
-		<p>Beschreibung</p>
-	  </div>
-		-->
-	  <!-- Table -->
-	  <table class="table table-hover">
-		<thead><td><b>AFID</b></td><td><b>Datum</b></td><td><b>Download</b></td></thead>
-		<tr><td><a href="#">12345<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-		<tr><td><a href="#">57634<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-		<tr><td><a href="#">67367<a/></td><td>XX.XX.XXXX</td><td><button type="submit" class="btn btn-default">Download</button></td></tr>
-	  </table>
-	  
-	  <!-- for ajax: <a data-toggle="modal" href="history.html" data-target="#history"></a> -->
+	<div class="row">
+		<!-- LISTE -->
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><b>Auswertungen</b></div>
+				<div class="panel-body">
+					Eine Liste aller verfuegbaren Queries
+				</div>
+				  <!-- Table -->
+				  <!-- <div class="overflow-table"> -->
+				  <table class="table table-hover table-striped" data-link="row">
+				  	<thead>
+				  		<tr><th>AWID</th><th>Text</th><th>Erstellt am</th><th>Bereich</th></tr>
+				  	</thead>
+				  		<tbody data-link="row" class="rowlink">
+				  			<!-- CURRENTLY LIMITED TO 10 QUERIES FOR TESTING PURPOSES !!! -->
+				  			<c:set var="count" value="0" scope="page" />
+					  		<c:forEach items="${queryList}" var="query">
+					  			<c:if test="${count < 10}">
+								<tr>
+									<td><a href="<c:url value="/query_selected/${query.awid}"/>" onclick="open_window(this.href, 'query_selected_<c:out value="${query.awid}" />'); return false;" ><c:out value="${query.awid}" /></a></td> 
+									<td><c:out value="${query.text}" /></td>
+									<td><c:out value="${query.erstellt}" /></td>
+									<td><c:out value="${query.bereich}" /></td>
+								</tr>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								</c:if>
+							</c:forEach>
+				  		</tbody>
+				  </table>
+				  <!-- </div> -->
+			</div>
+		</div>
+	</div>
 </div>

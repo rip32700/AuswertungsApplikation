@@ -10,7 +10,10 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />" />
 	<!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jasny-bootstrap.min.css" />" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jasny-bootstrap.min.css" />" /> 
+    <!-- WebSocket Protocols -->
+    <script src="<c:url value="/resources/js/sockjs-0.3.4.js"/>"></script>
+    <script src="<c:url value="/resources/js/stomp.js"/>"></script>
 </head>
 <body>
 	<div class="container">

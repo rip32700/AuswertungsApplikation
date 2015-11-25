@@ -1,14 +1,10 @@
 package com.phoebus.abfragen.persistence;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 
 import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 
 import com.phoebus.abfragen.model.Query;
 
@@ -18,6 +14,8 @@ public class QueryRepositoryImpl implements QueryRepository {
 			   									   "FROM ausw_auswertungen a WHERE a.aw_regelmaessig = 'J'";
 
 	private final static String FIND_ONE_QUERY = "SELECT * FROM ausw_auswertungen a WHERE a.AW_AWID = ?";
+	
+	private final static String INSERT_QUERY = "";
 
 	private JdbcOperations jdbcOperations;
 	
@@ -42,29 +40,17 @@ public class QueryRepositoryImpl implements QueryRepository {
 	}
 	
 	@Override
-	public Query findOneById(final int id) {
+	public Query findOneById(final long id) {
 		return jdbcOperations.queryForObject(FIND_ONE_QUERY, (rs, rowNum) -> {
-			return new Query(rs.getString("AW_AWID"), "", "", "", "", "", rs.getString("AW_SQL"));
+			return new Query(rs.getString("AW_AWID"), rs.getString("AW_TEXT"), rs.getString("AW_ART"), 
+							 rs.getString("AW_BENUTZER"), rs.getString("AW_ERSTELLT"), rs.getString("AW_BEREICH"), 
+							 rs.getString("AW_SQL"));
 		}, id);
 	}
 
-	
-//	@Override
-//	@Async
-//	public Future<List<Object>> executeQuery(String sql) {
-//		
-//		List<Object> results = jdbcOperations.query(sql, (rs, rowNum) -> {
-//			return Arrays.asList(rs.getString("AWID"));
-//		});
-//		
-//		try {
-//			Thread.sleep(10000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return new AsyncResult<List<Object>>(results);
-//	}
+	@Override
+	public void insertQuery(Query query) {
+		jdbcOperations.update(INSERT_QUERY);
+	}
 
 }

@@ -28,13 +28,14 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="//telis.it.tfsh/telis/User/PRIEGER/java-libs/jxls-reader-2.0.1.jar"/>
-	<classpathentry kind="lib" path="//telis.it.tfsh/telis/User/PRIEGER/java-libs/jxls-poi-1.0.6.jar"/>
-	<classpathentry kind="lib" path="//telis.it.tfsh/telis/User/PRIEGER/java-libs/jxls-jexcel-1.0.3.jar"/>
-	<classpathentry kind="lib" path="//telis.it.tfsh/telis/User/PRIEGER/java-libs/jxls-2.2.7.jar"/>
+	<classpathentry kind="lib" path="libs/jxls-2.2.7.jar"/>
+	<classpathentry kind="lib" path="libs/jxls-jexcel-1.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/jxls-poi-1.0.6.jar"/>
+	<classpathentry kind="lib" path="libs/jxls-reader-2.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/json-simple-1.1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

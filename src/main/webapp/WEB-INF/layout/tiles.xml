@@ -29,4 +29,8 @@
  		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
  	</definition>
  	
+ 	<definition name="websocket" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/websocket.jsp" />
+ 	</definition>
+ 	
  </tiles-definitions>

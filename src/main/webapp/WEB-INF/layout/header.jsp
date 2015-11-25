@@ -19,6 +19,7 @@
       <ul class="nav navbar-nav">
         <li><a href="<c:url value="/" />">Neue Auswertung</a></li>
         <li><a href="">Meine Historie</a></li>
+        <li><a href="<c:url value="/websockettest"/>">WebSocketTest</a></li>
         <!-- 
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>

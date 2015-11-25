@@ -8,6 +8,6 @@ import com.phoebus.abfragen.model.Query;
 public interface QueryRepository {
 	
 	List<Query> findAll();
-	Query findOneById(final int id);
-//	Future<List<Object>> executeQuery(final String sql);
+	Query findOneById(final long queryId);
+	void insertQuery(final Query query);
 }
