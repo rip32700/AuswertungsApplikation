@@ -3,58 +3,23 @@
 <%@ page session="false" %>
 
 <div class="starter-template">
-<div id="paramterSelection">
-    <div class="r">
-      <ul class="heading-text">
-      	<li>Bitte geben Sie im Folgendem die gewuenschte Parameter fuer die ausgewaehlte Query ein</li>
-      </ul>
-	</div>
- 	<br>
-	<div class="panel panel-default">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">Eingabe-Werte</div>
-		  <div class="panel-body">
-				Bitte geben Sie Ihre benoetigten Parameter ein.
-		  </div>
-			
-			<br/>
-			<form method="post" action="<c:url value="/parameter_selected" />">
-			<table class="table">
-				<c:forEach items="${boundVariables}" var="boundVar">
-					
-					<div class="form-group form-inline">
-						<tr>
-							<td><label for="<c:out value='${boundVar}'/>"><c:out value='${boundVar}'/></label></td>
-							<td><input type="text" class="form-control" id="<c:out value='${boundVar}'/>"/></td>
-						</tr>
-					</div>
-				</c:forEach>
-			</table>
-			</form>
-	</div>
-		<button onclick="sendId()" class="btn btn-primary btn-lg">Weiter</button>
-	
-</div>
+
 <div id="processingDiv">
 	<h2 class="text-center"> Anfrage wird bearbeitet</h2>
 	<h2 class="text-center"><img src='<c:url value="/resources/images/ajax-loader.gif" />'/></span></h2>
 </div>
 
 <div id="resultDiv">
-	<div class="r">
-      <ul class="heading-text">
-      	<li>Ihre Abfrage wurde erfolgreich bearbeitet</li>
-      	<li>Im Folgendem finden Sie eine Vorschau der ersten paar Zeilen des Ergebnisses</li>
-      	<li>Das vollstaendige Ergebnis koennen Sie durch einen Klick des Download-Buttons im Excel-Format abspeichern</li>
-      </ul>
+   
+	<div class="r" id="response_heading">
 	</div>
  	<br>
 	<p id="response">
-		
+		<!-- 
 		<div class="panel panel-default">
-		  <!-- Default panel contents -->
+		  <!-- Default panel contents 
 		  <div class="panel-heading"><b>Vorschau der Abfrage</b></div>
-		  <!-- Table -->
+		  <!-- Table 
 			  <table class="table table-hover">
 				<thead><td><b>Header1</b></td><td><b>Header2</b></td><td><b>Header3</b></td><td><b>Header3</b></td></thead>
 				<tr><td>data1_1</td><td>data1_2</td><td>data1_3</td><td>data1_4</td></tr>
@@ -75,6 +40,7 @@
 				</form>
 			  <br/><br/>
 			</div>
+		   -->
 	</p>
 </div>
 
@@ -82,11 +48,20 @@
 <script type="text/javascript">
 	
 	var stompClient = null;
+	var is_connected = false;
+	
 	connect();
-
+	
+	// wait for connection to be established before 
+	// calling send function, otherwise illegal state
+	var millisecondsToWait = 200;
+	setTimeout(function() {
+	    // Whatever you want to do after the wait
+		sendId();
+	}, millisecondsToWait);
+	
 	
     function setConnected(connected) {
-    	document.getElementById('processingDiv').style.visibility = 'hidden';
         document.getElementById('resultDiv').style.visibility = 'hidden';//connected ? 'visible' : 'hidden';
         document.getElementById('response').innerHTML = '';
     }
@@ -100,10 +75,12 @@
             console.log('Connected: ' + frame);
             
             var url = '/topic/query/' + ${query.awid};
-            stompClient.subscribe(url, function(query){
-                showQuery(JSON.parse(query.body).sql);
+            stompClient.subscribe(url, function(result){
+                showQuery(result.body);   //showQuery(JSON.parse(query.body).sql);
             });
         });
+        
+        is_connected = true;
     }
     
     function disconnect() {
@@ -116,14 +93,12 @@
     
     function sendId() {
     	
-    	
-    	
-    	document.getElementById('processingDiv').style.visibility = 'visible';
-    	$("#paramterSelection").remove();
-    	
         var id = ${query.awid};
+        var sql = "${query.sql}";
+        
+        
         var url = "/app/query/" + ${query.awid};
-        stompClient.send(url, {}, JSON.stringify({ 'id': id }));
+        stompClient.send(url, {}, JSON.stringify({ 'id': id, 'sql' : sql }));
     }
     
     function showQuery(message) {
@@ -131,12 +106,28 @@
     	document.getElementById('resultDiv').style.visibility = 'visible';
     	$("#processingDiv").remove();
     	
+    	var response_heading = document.getElementById('response_heading');
         var response = document.getElementById('response');
+        
+        var ul = document.createElement('ul');
+        ul.setAttribute('class', 'heading-text');
+        var li1 = document.createElement('li');
+        li1.appendChild(document.createTextNode('Ihre Abfrage wurde erfolgreich bearbeitet'));
+        ul.appendChild(li1);
+        var li2 = document.createElement('li');
+        li2.appendChild(document.createTextNode('Im Folgendem finden Sie eine Vorschau der ersten paar Zeilen des Ergebnisses'));
+        ul.appendChild(li2);
+        var li3 = document.createElement('li');
+        li3.appendChild(document.createTextNode('Das vollstaendige Ergebnis koennen Sie durch einen Klick des Download-Buttons im Excel-Format abspeichern'));
+        ul.appendChild(li3);
+        response_heading.appendChild(ul);
+        
         var p = document.createElement('p');
         p.style.wordWrap = 'break-word';
         p.appendChild(document.createTextNode(message));
         response.appendChild(p);
         
+       
         
     }
 </script>

@@ -66,7 +66,8 @@ function open_window(url, name) {
 								<td><c:out value="${queryList[0].bereich}" /></td>
 							</tr>
 							<tr>
-						  		<td><a href="<c:url value="/query_selected/${queryList[1].awid}"/>" onclick="open_window(this.href, 'query_selected_<c:out value="${queryList[1].awid}" />'); return false;" ><c:out value="${queryList[1].awid}" /></a></td> 
+						  		<td><a href="<c:url value="/query_selected/${queryList[3].awid}"/>" onclick="open_window(this.href, 'query_selected_<c:out value="${queryList[3].awid}" />'); return false;" ><c:out value="${queryList[3].awid}" /></a></td> 
+						  		<!--   -->
 								<td><c:out value="${queryList[1].text}" /></td>
 								<td><c:out value="${queryList[1].art}" /></td>
 								<td><c:out value="${queryList[1].erstellt}" /></td>

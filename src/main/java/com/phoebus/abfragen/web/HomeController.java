@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.phoebus.abfragen.model.BoundVariablesWrapper;
 import com.phoebus.abfragen.model.Query;
 import com.phoebus.abfragen.persistence.QueryRepository;
-import com.phoebus.abfragen.utils.BoundVarFilter;
+import com.phoebus.abfragen.utils.BoundVariableUtil;
 import com.phoebus.abfragen.utils.ListUtil;
 
 @Controller
@@ -45,6 +46,7 @@ public class HomeController {
 		return "home";
 	}
 	
+	
 	/**
 	 * invoked when a query was selected in the home view
 	 * @param model
@@ -54,16 +56,18 @@ public class HomeController {
 	@RequestMapping(value = "/query_selected/{awid}", method = RequestMethod.GET)
 	public String querySelected(@PathVariable(value="awid") final int awid, final Model model) {
 		
-		// get the selected query
+		//get the selected query
 		Query query = repository.findOneById(awid);
 		
-		// get all bound variables
-		List<String> boundVars = BoundVarFilter.getBoundVariables(query.getSql());
+		//get bound variables
+		BoundVariablesWrapper wrapper = new BoundVariablesWrapper();
+		wrapper.setAwid(awid);
+		wrapper.setVariableList(BoundVariableUtil.getBoundVariables(query.getSql()));
 		
-		// put objects into the model for usage in JSP
-		model.addAttribute("boundVariables", boundVars);
-		model.addAttribute("query", query);
+		//set into the model for usage in jsp
+		model.addAttribute("boundVariablesWrapper", wrapper);
 		
-		return "parameter_selection";
+		return "parameter_selection2";
 	}
+	
 }

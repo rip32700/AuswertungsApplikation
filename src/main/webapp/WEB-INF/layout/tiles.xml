@@ -13,24 +13,16 @@
  		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
  	</definition>
  	
- 	<definition name="query_selection" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/query_selection.jsp" />
- 	</definition>
- 	
  	<definition name="parameter_selection" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/parameter_selection.jsp" />
  	</definition>
  	
+ 	<definition name="parameter_selection2" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/parameter_selection2.jsp" />
+ 	</definition>
+ 	
  	<definition name="processing" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/processing.jsp" />
- 	</definition>
- 	
- 	<definition name="result" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
- 	</definition>
- 	
- 	<definition name="websocket" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/websocket.jsp" />
  	</definition>
  	
  </tiles-definitions>
