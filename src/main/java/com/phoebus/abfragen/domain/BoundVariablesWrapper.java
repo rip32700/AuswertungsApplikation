@@ -1,4 +1,4 @@
-package com.phoebus.abfragen.model;
+package com.phoebus.abfragen.domain;
 
 import java.util.List;
 

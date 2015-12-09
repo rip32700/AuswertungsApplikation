@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.phoebus.abfragen.model.Query;
+import com.phoebus.abfragen.domain.Query;
 
 public class ListUtil {
 

@@ -11,12 +11,18 @@ public class AbfragenWebAppInitializer extends AbstractAnnotationConfigDispatche
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebConfig.class };
+		return new Class<?>[] { WebConfig.class, SecurityConfig.class };
 	}
 
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
+	
+	@Override
+    protected boolean isAsyncSupported() {
+        return true;
+    }
+
 
 }

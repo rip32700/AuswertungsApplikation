@@ -9,6 +9,10 @@
  		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
  	</definition>
  	
+ 	<definition name="login" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+ 	</definition>
+ 	
  	<definition name="home" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
  	</definition>
@@ -17,12 +21,16 @@
  		<put-attribute name="body" value="/WEB-INF/views/parameter_selection.jsp" />
  	</definition>
  	
- 	<definition name="parameter_selection2" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/parameter_selection2.jsp" />
- 	</definition>
- 	
  	<definition name="processing" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/processing.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="admin" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/admin.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="asyncTest" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/asyncTest.jsp" />
  	</definition>
  	
  </tiles-definitions>

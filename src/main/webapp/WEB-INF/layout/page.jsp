@@ -8,6 +8,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Abfragen</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />" />
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jasny-bootstrap.min.css" />" /> 

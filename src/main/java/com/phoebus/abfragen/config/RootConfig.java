@@ -10,11 +10,13 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.phoebus.abfragen.persistence.QueryRepository;
-import com.phoebus.abfragen.persistence.QueryRepositoryImpl;
+import com.phoebus.abfragen.repository.BoundVariableRepository;
+import com.phoebus.abfragen.repository.BoundVariableRepositoryImpl;
+import com.phoebus.abfragen.repository.QueryRepository;
+import com.phoebus.abfragen.repository.QueryRepositoryImpl;
 
 @Configuration
-@ComponentScan( {"com.phoebus.abfragen.service" })
+@ComponentScan( {"com.phoebus.abfragen.service", "com.phoebus.abfragen.config" })
 public class RootConfig {
 
 	@Bean
@@ -37,4 +39,8 @@ public class RootConfig {
 		return new QueryRepositoryImpl(jdbcOperations);
 	}
 	
+	@Bean
+	public BoundVariableRepository boundVariableRepository(JdbcOperations jdbcOperations) {
+		return new BoundVariableRepositoryImpl(jdbcOperations);
+	}
 }

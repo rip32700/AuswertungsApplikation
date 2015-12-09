@@ -2,18 +2,21 @@ package com.phoebus.abfragen.web;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.phoebus.abfragen.model.BoundVariablesWrapper;
-import com.phoebus.abfragen.model.Query;
-import com.phoebus.abfragen.persistence.QueryRepository;
+import com.phoebus.abfragen.domain.BoundVariablesWrapper;
+import com.phoebus.abfragen.domain.Query;
+import com.phoebus.abfragen.repository.QueryRepository;
 import com.phoebus.abfragen.utils.BoundVariableUtil;
 import com.phoebus.abfragen.utils.ListUtil;
 
@@ -46,7 +49,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	
 	/**
 	 * invoked when a query was selected in the home view
 	 * @param model
@@ -54,8 +56,18 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/query_selected/{awid}", method = RequestMethod.GET)
-	public String querySelected(@PathVariable(value="awid") final int awid, final Model model) {
+	public String querySelected(@PathVariable(value="awid") final int awid, final Model model, final HttpServletRequest request) {
 		
+		// if redirected from processing controller
+		Map<String, ?> inputFlashmap = RequestContextUtils.getInputFlashMap(request);
+		if(inputFlashmap != null) {
+			model.addAttribute("boundVariablesWrapper", (BoundVariablesWrapper) inputFlashmap.get("boundVariablesWrapper"));
+			model.addAttribute("errorMessage", (String) inputFlashmap.get("errorMessage"));
+			model.addAttribute("showErrorMessage", true);
+			
+			return "parameter_selection";
+		}
+			
 		//get the selected query
 		Query query = repository.findOneById(awid);
 		
@@ -67,7 +79,7 @@ public class HomeController {
 		//set into the model for usage in jsp
 		model.addAttribute("boundVariablesWrapper", wrapper);
 		
-		return "parameter_selection2";
+		return "parameter_selection";
 	}
 	
 }

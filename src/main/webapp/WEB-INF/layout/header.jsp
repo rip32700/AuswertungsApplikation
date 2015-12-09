@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	  
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 	
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -19,14 +19,17 @@
       <ul class="nav navbar-nav">
         <li><a href="<c:url value="/" />">Neue Auswertung</a></li>
         <li><a href="">Meine Historie</a></li>
-        <li><a href="<c:url value="/websockettest"/>">WebSocketTest</a></li>
+        <li><a href="<c:url value="/asyncTest"/>">AsyncTest</a></li>
         <!-- 
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
          -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="" class="navbar-right">Ausloggen</a></li>
+      	<security:authorize access="hasRole('ADMIN')">
+      		<li><a href="<c:url value="/admin" />" class="navbar-right">Admin Optionen</a>
+      	</security:authorize>
+      	<li><a href="<c:url value="/logout" />" class="navbar-right">Ausloggen</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

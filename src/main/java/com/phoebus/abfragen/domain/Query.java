@@ -1,4 +1,4 @@
-package com.phoebus.abfragen.model;
+package com.phoebus.abfragen.domain;
 
 public class Query {
 
@@ -9,6 +9,10 @@ public class Query {
 	private String erstellt;
 	private String bereich;
 	private String sql;
+	
+	public Query() {
+		
+	}
 	
 	public Query(String awid, String text, String art, String benutzer, String erstellt, String bereich, String sql) {
 		super();

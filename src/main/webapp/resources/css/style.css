@@ -25,6 +25,12 @@
 	overflow:scroll;
 }
 
+.result-overflow-table {
+	height: 600px !important;
+	/*width:  1200px !important;*/
+	overflow: auto;
+}
+
 
 .overflow-table-fav {
 	height: 150px !important;

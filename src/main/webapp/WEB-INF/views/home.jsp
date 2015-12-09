@@ -3,8 +3,53 @@
 
 <script type="text/javascript">
 function open_window(url, name) {
-    window.open(url, name, "width=800, height=600");
+    window.open(url, name, "scrollbars=1, width=800, height=600");
 }
+
+$(document).ready(function(){
+	
+	var bereiche_selection;
+	var erstellt_selection;
+	
+	// filter for "bereich" selection box
+	$('#bereiche_select').change(function() {
+		bereiche_selection = $(this).val();
+		filterRows();	
+	})
+	
+	// filter for "erstellt" selection box
+	$('#erstellt_select').change(function() {
+		erstellt_selection = $(this).val()
+		filterRows();
+	})
+	
+	function filterRows() {
+		// filter table so that just rows containing the restriction are shown
+		var rows = $('#auswertungen_table_body').find("tr");
+		rows.hide();
+		rows.filter(function(i, v) {
+			var $t = $(this);
+			
+			//check which restrictions are set
+			if (typeof bereiche_selection !== 'undefined' && typeof erstellt_selection !== 'undefined') {
+				if($t.is(":contains('" + bereiche_selection + "')") && $t.is(":contains('" + erstellt_selection + "')")) {
+					return true;
+				}
+			} else if (typeof bereiche_selection !== 'undefined') {
+				if($t.is(":contains('" + bereiche_selection + "')")) {
+					return true;
+				}
+			} else {
+				if($t.is(":contains('" + erstellt_selection + "')")) {
+					return true;
+				}
+			}
+			
+			return false;
+		}).show();
+	}
+	
+});
 </script>
 
 
@@ -29,18 +74,21 @@ function open_window(url, name) {
 					<form>
 						<div class="form-group">
 							Bereich:
-							<select class="form-control">
+							<select class="form-control" id="bereiche_select">
 								<c:forEach items="${bereicheList}" var="bereich">
 									<option>${bereich}</option>
 								</c:forEach>
 							</select>
 							Erstell-Datum:
-							<select class="form-control">
+							<select class="form-control" id="erstellt_select">
 								<c:forEach items="${erstelltList}" var="datum">
 									<option>${datum}</option>
 								</c:forEach>
 							</select>
 						</div>
+					</form>
+					<form action="">
+						<button type="submit" class="btn btn-primary">Filter zuruecksetzen</button>
 					</form>
 			</div>
 		</div>
@@ -93,7 +141,7 @@ function open_window(url, name) {
 				  	<thead>
 				  		<tr><th>AWID</th><th>Text</th><th>Erstellt am</th><th>Bereich</th></tr>
 				  	</thead>
-				  		<tbody data-link="row" class="rowlink">
+				  		<tbody data-link="row" class="rowlink" id="auswertungen_table_body">
 				  			<!-- CURRENTLY LIMITED TO 10 QUERIES FOR TESTING PURPOSES !!! -->
 				  			<c:set var="count" value="0" scope="page" />
 					  		<c:forEach items="${queryList}" var="query">
