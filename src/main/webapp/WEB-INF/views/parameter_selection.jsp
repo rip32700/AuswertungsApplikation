@@ -67,7 +67,7 @@
 	    for(i = 0; i <= length; i++) {
 	    	var x = document.getElementById("input" + "${counter}").value;
 	    	if(!x.length) {
-		    	failed = true;
+		    	failed = false;
 		    }
 	    }
 		

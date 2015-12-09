@@ -25,6 +25,7 @@ import com.phoebus.abfragen.domain.ResultObject;
 import com.phoebus.abfragen.repository.QueryRepository;
 import com.phoebus.abfragen.utils.BoundVariableUtil;
 import com.phoebus.abfragen.utils.ExcelReportView;
+import com.phoebus.abfragen.utils.ValidationUtil;
 
 @Controller
 public class ProcessingController {
@@ -71,11 +72,11 @@ public class ProcessingController {
 		 * if validation fails, redirect 
 		 */
 		if(boundVariablesWrapper.getVariableList() != null && !boundVariablesWrapper.getVariableList().isEmpty()) {
-			List<String> invalidVars = BoundVariableUtil.validateFormInput(boundVariablesWrapper);
+			List<String> invalidVars = ValidationUtil.validateBoundVariables(boundVariablesWrapper);
 			//check for invalid input
 			if(!invalidVars.isEmpty()) {
 				 redirectAttributes.addFlashAttribute("boundVariablesWrapper", boundVariablesWrapper);
-				 redirectAttributes.addFlashAttribute("errorMessage", buildErrorMessageForParameterForm(invalidVars));
+				 redirectAttributes.addFlashAttribute("errorMessage", ValidationUtil.buildErrorMessageForInvalidFormFields(invalidVars));
 				 return "redirect://query_selected/" + boundVariablesWrapper.getAwid();
 			}
 		}
@@ -93,20 +94,4 @@ public class ProcessingController {
 		return "processing";
 	}
 	
-	private String buildErrorMessageForParameterForm(List<String> invalidParamters) {
-		
-		// build error message
-		 String errorMessage = "Die Eingaben der Paramter ";
-		 int i = 1;
-		 for (String var : invalidParamters) {
-			 if(i == invalidParamters.size())
-				 errorMessage += var;
-			 else
-				 errorMessage += var + ", ";
-			 i++;
-		 }
-		 errorMessage += " ist fehlerhaft.\nBitte uerberpruefen Sie Ihre Eingaben.";
-		 
-		 return errorMessage;
-	}
 }

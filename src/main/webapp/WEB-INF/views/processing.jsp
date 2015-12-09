@@ -31,6 +31,7 @@
 
 <script type="text/javascript">
 	
+	document.getElementById("container").style.visibility = 'hidden';
 	var stompClient = null;
 	var is_connected = false;
 	
@@ -84,6 +85,8 @@
     }
     
     function showResult(message) {
+    	
+    	document.getElementById("container").style.visibility = 'visible';
     	
     	// extract column names and rows
     	var tmp = message.split("],");

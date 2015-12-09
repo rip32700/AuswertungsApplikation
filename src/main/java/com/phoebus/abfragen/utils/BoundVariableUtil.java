@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.phoebus.abfragen.domain.BoundVariable;
-import com.phoebus.abfragen.domain.BoundVariablesWrapper;
 
 public class BoundVariableUtil {
 
@@ -37,19 +36,6 @@ public class BoundVariableUtil {
 		}
 		
 		return sql;
-	}
-	
-	public static List<String> validateFormInput(BoundVariablesWrapper boundVariablesWrapper) {
-		
-		List<String> list = new ArrayList<>();
-		
-		for(BoundVariable var : boundVariablesWrapper.getVariableList()) {
-			if (var.getValue() == null || var.getValue().isEmpty() || /*for testing*/ "test".equals(var.getValue())) {
-				list.add(var.getBezeichnung());
-			}
-		}
-		
-		return list;
 	}
 	
 }
