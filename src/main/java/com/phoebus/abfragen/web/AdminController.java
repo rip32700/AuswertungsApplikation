@@ -42,6 +42,7 @@ public class AdminController {
 		} else {
 			//original request (not redirected)
 			model.addAttribute("query", new Query());
+			model.addAttribute("showErrorMessage", false);
 		}
 		
 		model.addAttribute("currentDate", sdf.format(Calendar.getInstance().getTime()));

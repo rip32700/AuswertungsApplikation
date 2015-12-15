@@ -23,7 +23,14 @@
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">Eingabe-Werte</div>
 		  <div class="panel-body">
-				Bitte geben Sie Ihre benoetigten Parameter ein.
+		  		<c:choose>
+					<c:when test="${not empty boundVariablesWrapper.variableList}">
+						Bitte geben Sie Ihre benoetigten Parameter ein.
+					</c:when>
+					<c:otherwise>
+						Fuer diese Auswertung sind keine Parameter konfigurierbar.
+					</c:otherwise>		  		
+		  		</c:choose>
 		  </div>
 			
 		  <br/>

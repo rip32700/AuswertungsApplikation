@@ -16,10 +16,10 @@
 				</c:if>
 			    
                 </div>
-				<form name="f" action="<c:url value="/login" />" method="post">
+				<form name="f" action="<c:url value="/login" />" method="post" onsubmit="return validateForm()">
 					<table class="table">
-						<tr><td>User:</td><td><input type="text" name="username" value="" /></td></tr>
-						<tr><td>Passwort:</td><td><input type="password" name="password" value="" /></td></tr>
+						<tr><td>User:</td><td><input id="username" type="text" name="username" value="" /></td><td><div id="userError" style="color:red;"></div></td></tr>
+						<tr><td>Passwort:</td><td><input id="password" type="password" name="password" value="" /></td><td><div id="passwordError" style="color:red;"></div></td></tr>
 						<tr> </tr>
 						<tr><td></td><td><button type="submit" class="btn btn-primary">Einloggen</button></td></tr>
 					</table>
@@ -28,4 +28,34 @@
 			</div>
 		</div>	
 	</div>
-</div>
+
+<script type="text/javascript">
+	function validateForm() {
+		
+		var failed = false;
+
+		if(!validateElement('username', 'Bitte geben Sie einen Benuzternamen ein.')) 
+			failed = true;
+		if(!validateElement('password', 'Bitte geben Sie ein Passwort ein.'))
+			failed = true;	
+		
+		//if(failed) {
+		//	document.getElementById('errorMsg').innerHTML = "Bitte fuellen Sie alle Felder aus.";
+		//}
+
+		return !failed;
+	}
+	
+	function validateElement(name, message) {
+		var element = document.getElementById(name);
+		if(!element.value.length) {
+			element.setAttribute("required", "required");
+			document.getElementById(name + "Error").innerHTML = message;
+			return false; // failed
+		} else {
+			element.removeAttribute("required");
+			document.getElementById(name + "Error").innerHTML = "";
+			return true; // not failed
+		} 
+	}
+</script>

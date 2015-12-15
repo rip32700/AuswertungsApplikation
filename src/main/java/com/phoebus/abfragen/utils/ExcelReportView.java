@@ -70,7 +70,7 @@ public class ExcelReportView extends AbstractXlsView {
         }
         
         // set file name
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-YYYY");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
         String fileName = "Auswertung__" + (String) model.get("queryTitle") + "__" + sdf.format(Calendar.getInstance().getTime()) + ".xls";
         response.setHeader("Content-Disposition",  "inline; filename=" + fileName);
 	}

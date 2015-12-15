@@ -37,6 +37,24 @@
 	overflow: auto;
 }
 
+/* VALIDATION */
+
+/* style all elements with a required attribute */
+
+.validationErrorDiv {
+	color: 'red';
+}
+
+:required {
+  /*background: red;*/
+  border: 1px solid red;
+} 
+
+
+
+
+
+/* LINKS */
 
 /* unvisited link */
 a:link {

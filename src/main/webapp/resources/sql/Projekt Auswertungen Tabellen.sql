@@ -17,7 +17,7 @@ CREATE TABLE T20.AU_AUSWERTUNGEN
   AU_VERTRIEBSKZ   VARCHAR2(8),
   AU_BEREICH       VARCHAR2(50),
   AU_DATUM         DATE,
-  AU_TITEL         VARCHAR2(60),
+  AU_TITEL         VARCHAR2(100),
   AU_BESCHREIBUNG  VARCHAR2(3000),
   AU_SQL           CLOB
 );
@@ -93,8 +93,9 @@ GRANT SELECT ON T20.AU_PARAMETER TO TESTER;
 
 --Befüllung zum Test:
 INSERT INTO AU_AUSWERTUNGEN VALUES(1, 'Atomare Liste', 'TELIS', 'Mandanten', SYSDATE, 'Testauswertung', 'Eine Auswertung zum testen', 'SELECT * FROM Antraege WHERE AN_VERTRIEBSKZ = :vertriebskz');
-INSERT INTO AU_PARAMETER VALUES(1, ':vertriebskz', 'auswahl', 'VertriebsKZ', 'Vertriebskürzel', 'T', 'SELECT vt_vertriebskz, vt_vertriebsbez FROM vertriebe', NULL);
+INSERT INTO AU_PARAMETER VALUES(1, ':vertriebskz', 'Werteliste', 'VertriebsKZ', 'Vertriebskürzel', 'T', 'SELECT vt_vertriebskz, vt_vertriebsbez FROM vertriebe', NULL);
 INSERT INTO AU_AUSWERTUNGSPARAMETER VALUES(1, 1);
 INSERT INTO AU_FAVORITEN VALUES(1, 'MLINDE');
 INSERT INTO AU_FAVORITEN VALUES(1, 'PRIEGER');
+insert into AU_INSTANZEN VALUES(1, 1, SYSDATE, 'TEST', '--', -1);
 COMMIT;

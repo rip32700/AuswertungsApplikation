@@ -51,7 +51,7 @@ public class ProcessingController {
 		List<List<String>> results = repository.executeQuery(sqlStmt);
 		
     	// simulated delay
-        Thread.sleep(4000); 
+        //Thread.sleep(4000); 
         
         return results;
     }

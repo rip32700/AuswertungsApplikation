@@ -21,12 +21,12 @@ import com.phoebus.abfragen.utils.BoundVariableUtil;
 import com.phoebus.abfragen.utils.ListUtil;
 
 @Controller
-public class HomeController {
+public class QueryController {
 	
 	private QueryRepository repository;
 
 	@Inject
-	public HomeController(QueryRepository repository) {
+	public QueryController(QueryRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -36,7 +36,7 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(final Model model) {
+	public String querySelection(final Model model) {
 		
 		// list for all queries
 		List<Query> queries = repository.findAll();
@@ -46,7 +46,7 @@ public class HomeController {
 		model.addAttribute("bereicheList", ListUtil.getSortedAndDistinctLists(queries, "bereich"));
 		model.addAttribute("erstelltList", ListUtil.getSortedAndDistinctLists(queries, "erstellt"));
 		
-		return "home";
+		return "query_selection";
 	}
 	
 	/**

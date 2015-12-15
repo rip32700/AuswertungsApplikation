@@ -13,8 +13,8 @@
  		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
  	</definition>
  	
- 	<definition name="home" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+ 	<definition name="query_selection" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/query_selection.jsp" />
  	</definition>
  	
  	<definition name="parameter_selection" extends="base">
