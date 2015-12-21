@@ -12,12 +12,13 @@ import com.phoebus.abfragen.domain.Query;
 
 public class QueryRepositoryImpl implements QueryRepository {
 
-	private final static String FIND_ALL_QUERIES = "SELECT AW_AWID, AW_TEXT, AW_ART, AW_BENUTZER, AW_ERSTELLT, AW_BEREICH, AW_SQL " + 
-			   									   "FROM ausw_auswertungen a WHERE a.aw_regelmaessig = 'J'"; // restrict for logged in user
+	private final static String FIND_ALL_QUERIES = "SELECT AU_AID AW_AWID, AU_TITEL AW_TEXT, AU_ART AW_ART, AU_DATUM AW_ERSTELLT, AU_BEREICH"
+															+ "AW_BEREICH FROM AU_AUSWERTUNGEN ORDER BY AU_AID"; // restrict for logged in user
 
-	private final static String FIND_ONE_QUERY = "SELECT * FROM ausw_auswertungen a WHERE a.AW_AWID = ?";
+	private final static String FIND_ONE_QUERY = "SELECT AU_AID AW_AWID, AU_TITEL AW_TEXT, AU_ART AW_ART, AU_DATUM AW_ERSTELLT, AU_BEREICH"
+															+ "AW_BEREICH FROM AU_AUSWERTUNGEN WHERE AU_AID = ?";
 	
-	private final static String INSERT_QUERY = "";
+	private final static String INSERT_QUERY = "INSERT INTO AU_AUSWERTUNGEN VALUES(?, ?, ?, ?, SYSDATE, ?, ?, ?)";
 
 	private JdbcOperations jdbcOperations;
 	
